@@ -4,110 +4,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freelance Portfolio & Resume Services</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #f8f9fa; color: #333; line-height: 1.6; }
-        header { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; text-align: center; padding: 4rem 1rem; }
-        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-        header p { font-size: 1.1rem; color: #94a3b8; }
-        .container { max-width: 1100px; margin: auto; padding: 2rem 1rem; }
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: -3rem; }
-        .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border-top: 5px solid #2563eb; }
-        .card.purple { border-top-color: #9333ea; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
-        .price { font-size: 2rem; font-weight: 700; color: #2563eb; margin: 1rem 0; }
-        .card.purple .price { color: #9333ea; }
-        .btn { display: inline-block; background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin-top: 1rem; border: none; cursor: pointer; }
-        .card.purple .btn { background: #9333ea; }
-        .contact-section { background: white; border-radius: 12px; padding: 2rem; margin-top: 3rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .contact-section h2 { text-align: center; margin-bottom: 1.5rem; }
-        form { display: grid; gap: 1rem; max-width: 600px; margin: auto; }
-        input, textarea, select { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; }
-        footer { text-align: center; padding: 2rem; background: #0f172a; color: white; margin-top: 3rem; }
-        .social-links a { color: #38bdf8; margin: 0 10px; font-size: 1.2rem; text-decoration: none; }
+        :root {
+            --bg-color: #090d16;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-glow: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; overflow-x: hidden; }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 100%);
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        header { text-align: center; padding: 5rem 1rem 3rem; }
+        .badge { display: inline-block; background: rgba(59, 130, 246, 0.1); color: #60a5fa; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; border: 1px solid rgba(59, 130, 246, 0.2); }
+        header h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1rem; background: linear-gradient(to right, #ffffff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header p { font-size: 1.1rem; color: var(--text-muted); max-width: 600px; margin: auto; }
+
+        .container { max-width: 1100px; margin: auto; padding: 0 1.5rem 4rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-top: 2rem; }
+
+        .card { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--border-color); border-radius: 20px; padding: 2.5rem 2rem; text-align: left; transition: transform 0.3s ease; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); border-color: rgba(59, 130, 246, 0.4); }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--primary-glow); }
+
+        .card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5; }
+        .price-tag { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem; display: flex; align-items: baseline; gap: 0.3rem; }
+        .price-tag span { font-size: 0.9rem; font-weight: 400; color: var(--text-muted); }
+
+        .btn { display: inline-flex; justify-content: center; align-items: center; width: 100%; background: var(--primary-glow); color: white; padding: 0.85rem 1.5rem; border-radius: 12px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: none; cursor: pointer; }
+
+        .contact-section { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--border-color); border-radius: 24px; padding: 3rem 2rem; margin-top: 4rem; }
+        .contact-section h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 2rem; }
+
+        form { display: grid; gap: 1.2rem; max-width: 650px; margin: auto; }
+        input, textarea, select { width: 100%; padding: 1rem; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 12px; color: white; font-size: 0.95rem; outline: none; }
+        input:focus, textarea:focus, select:focus { border-color: #3b82f6; }
+        select option { background: #0f172a; color: white; }
+
+        footer { text-align: center; padding: 3rem 1rem; border-top: 1px solid var(--border-color); margin-top: 4rem; color: var(--text-muted); font-size: 0.9rem; }
+        .social-links { margin-top: 1rem; display: flex; justify-content: center; gap: 1.5rem; }
+        .social-links a { color: #60a5fa; font-size: 1.3rem; text-decoration: none; }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Freelance Portfolio & Resume Services</h1>
-        <p>Affordable, Custom & Professional Career Solutions Starting at ₹50</p>
+        <span class="badge">🚀 Professional Freelance Services</span>
+        <h1>Elevate Your Career Profile</h1>
+        <p>Affordable, Custom & Premium Portfolio & Resume Engineering Starting at ₹50.</p>
     </header>
 
     <div class="container">
         <div class="services-grid">
             <div class="card">
-                <h3>Professional Portfolio Design</h3>
-                <p>Create a stunning display of your skills, projects & achievements to land your dream job!</p>
-                <div class="price">₹50 onwards</div>
-                <a href="#contact" class="btn">Book Portfolio</a>
+                <h3>Portfolio Design</h3>
+                <p>Create a high-performance visual display of your technical skills, projects & achievements.</p>
+                <div class="price-tag">₹50 <span>/ starting</span></div>
+                <a href="#contact" class="btn">Book Portfolio Design</a>
             </div>
-            <div class="card purple">
-                <h3>Professional Resume Design</h3>
-                <p>ATS-friendly resumes, captivating cover letters & profile optimization to stand out!</p>
-                <div class="price">₹50 onwards</div>
-                <a href="#contact" class="btn">Book Resume</a>
+
+            <div class="card">
+                <h3>Resume Engineering</h3>
+                <p>ATS-optimized professional layouts and tailored keyword targeting to pass recruiter screening.</p>
+                <div class="price-tag">₹50 <span>/ starting</span></div>
+                <a href="#contact" class="btn">Book Resume Build</a>
             </div>
         </div>
 
         <div class="contact-section" id="contact">
-            <h2>Get In Touch / Book Service</h2>
-            <form id="bookingForm">
+            <h2>Start Your Project</h2>
+            <form id="directMailForm">
                 <input type="text" id="name" placeholder="Your Full Name" required>
                 <input type="email" id="email" placeholder="Your Email Address" required>
-                <input type="text" id="phone" placeholder="Your Phone Number" required>
+                <input type="text" id="phone" placeholder="Your Phone Number (+91...)" required>
                 <select id="service">
-                    <option value="Portfolio Design">Portfolio Design (₹50)</option>
-                    <option value="Resume Design">Resume Design (₹50)</option>
+                    <option value="Portfolio Design">Portfolio Design (₹50 onwards)</option>
+                    <option value="Resume Design">Resume Design (₹50 onwards)</option>
                 </select>
-                <textarea id="message" rows="4" placeholder="Describe your requirement..." required></textarea>
-                <button type="submit" class="btn" style="width: 100%;">Submit Inquiry</button>
+                <textarea id="message" rows="4" placeholder="Briefly describe your requirements..." required></textarea>
+                <button type="submit" class="btn"><i class="fas fa-paper-plane" style="margin-right: 8px;"></i> Send Direct Email</button>
             </form>
-            <p id="responseMsg" style="text-align:center; margin-top:1rem; font-weight:600;"></p>
         </div>
     </div>
 
     <footer>
-        <p>Contact: +91 8072872240 | Email: bb7858843@gmail.com</p>
-        <div class="social-links" style="margin-top: 1rem;">
-            <a href="https://www.linkedin.com/in/free-lencer-8a49a0447" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
+        <p>Direct Contact: +91 8072872240 &nbsp;|&nbsp; Email: bb7858843@gmail.com</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/free-lencer-8a49a0447" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
         </div>
     </footer>
 
-    <!-- Supabase JS Client SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Your Supabase Configuration
-        const SUPABASE_URL = 'https://zepcopfwdcviidskgshk.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplcGNvcGZ3ZGN2aWlkc2tnc2hrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODY4NDEsImV4cCI6MjEwODg2Mjg0MX0.OtRohqXVu7PvA8QsTBThreQPSVIlsZDO2jk7G2mpCu0';
-        
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        document.getElementById('directMailForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const data = {
-                client_name: document.getElementById('name').value,
-                client_email: document.getElementById('email').value,
-                client_phone: document.getElementById('phone').value,
-                message: `${document.getElementById('service').value}: ${document.getElementById('message').value}`
-            };
 
-            const { error } = await supabaseClient
-                .from('inquiries')
-                .insert([data]);
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const message = document.getElementById('message').value;
 
-            const msgEl = document.getElementById('responseMsg');
-            if (error) {
-                msgEl.style.color = 'red';
-                msgEl.textContent = 'Submission failed: ' + error.message;
-            } else {
-                msgEl.style.color = 'green';
-                msgEl.textContent = 'Booking inquiry submitted successfully!';
-                document.getElementById('bookingForm').reset();
-            }
+            const recipient = "bb7858843@gmail.com";
+            const subject = encodeURIComponent(`New Booking: ${service} - ${name}`);
+            const body = encodeURIComponent(
+                `Client Name: ${name}\n` +
+                `Client Email: ${email}\n` +
+                `Client Phone: ${phone}\n` +
+                `Service Selected: ${service}\n\n` +
+                `Requirements:\n${message}`
+            );
+
+            // Opens default email app directly addressed to your Gmail
+            window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
         });
     </script>
 </body>
