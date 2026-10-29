@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Portfolio & Resume Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: #f8f9fa; color: #333; line-height: 1.6; }
+        header { background: linear-gradient(135deg, #0f172a, #1e293b); color: white; text-align: center; padding: 4rem 1rem; }
+        header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        header p { font-size: 1.1rem; color: #94a3b8; }
+        .container { max-width: 1100px; margin: auto; padding: 2rem 1rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: -3rem; }
+        .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; border-top: 5px solid #2563eb; }
+        .card.purple { border-top-color: #9333ea; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .price { font-size: 2rem; font-weight: 700; color: #2563eb; margin: 1rem 0; }
+        .card.purple .price { color: #9333ea; }
+        .btn { display: inline-block; background: #2563eb; color: white; padding: 0.75rem 1.5rem; border-radius: 6px; text-decoration: none; font-weight: 600; margin-top: 1rem; border: none; cursor: pointer; }
+        .card.purple .btn { background: #9333ea; }
+        .contact-section { background: white; border-radius: 12px; padding: 2rem; margin-top: 3rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .contact-section h2 { text-align: center; margin-bottom: 1.5rem; }
+        form { display: grid; gap: 1rem; max-width: 600px; margin: auto; }
+        input, textarea, select { width: 100%; padding: 0.75rem; border: 1px solid #cbd5e1; border-radius: 6px; }
+        footer { text-align: center; padding: 2rem; background: #0f172a; color: white; margin-top: 3rem; }
+        .social-links a { color: #38bdf8; margin: 0 10px; font-size: 1.2rem; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Freelance Portfolio & Resume Services</h1>
+        <p>Affordable, Custom & Professional Career Solutions Starting at ₹50</p>
+    </header>
+
+    <div class="container">
+        <div class="services-grid">
+            <div class="card">
+                <h3>Professional Portfolio Design</h3>
+                <p>Create a stunning display of your skills, projects & achievements to land your dream job!</p>
+                <div class="price">₹50 onwards</div>
+                <a href="#contact" class="btn">Book Portfolio</a>
+            </div>
+            <div class="card purple">
+                <h3>Professional Resume Design</h3>
+                <p>ATS-friendly resumes, captivating cover letters & profile optimization to stand out!</p>
+                <div class="price">₹50 onwards</div>
+                <a href="#contact" class="btn">Book Resume</a>
+            </div>
+        </div>
+
+        <div class="contact-section" id="contact">
+            <h2>Get In Touch / Book Service</h2>
+            <form id="bookingForm">
+                <input type="text" id="name" placeholder="Your Full Name" required>
+                <input type="email" id="email" placeholder="Your Email Address" required>
+                <input type="text" id="phone" placeholder="Your Phone Number" required>
+                <select id="service">
+                    <option value="Portfolio Design">Portfolio Design (₹50)</option>
+                    <option value="Resume Design">Resume Design (₹50)</option>
+                </select>
+                <textarea id="message" rows="4" placeholder="Describe your requirement..." required></textarea>
+                <button type="submit" class="btn" style="width: 100%;">Submit Inquiry</button>
+            </form>
+            <p id="responseMsg" style="text-align:center; margin-top:1rem; font-weight:600;"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Contact: +91 8072872240 | Email: bb7858843@gmail.com</p>
+        <div class="social-links" style="margin-top: 1rem;">
+            <a href="https://www.linkedin.com/in/free-lencer-8a49a0447" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
+        </div>
+    </footer>
+
+    <!-- Supabase JS Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Your Supabase Configuration
+        const SUPABASE_URL = 'https://zepcopfwdcviidskgshk.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplcGNvcGZ3ZGN2aWlkc2tnc2hrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyODY4NDEsImV4cCI6MjEwODg2Mjg0MX0.OtRohqXVu7PvA8QsTBThreQPSVIlsZDO2jk7G2mpCu0';
+        
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const data = {
+                client_name: document.getElementById('name').value,
+                client_email: document.getElementById('email').value,
+                client_phone: document.getElementById('phone').value,
+                message: `${document.getElementById('service').value}: ${document.getElementById('message').value}`
+            };
+
+            const { error } = await supabaseClient
+                .from('inquiries')
+                .insert([data]);
+
+            const msgEl = document.getElementById('responseMsg');
+            if (error) {
+                msgEl.style.color = 'red';
+                msgEl.textContent = 'Submission failed: ' + error.message;
+            } else {
+                msgEl.style.color = 'green';
+                msgEl.textContent = 'Booking inquiry submitted successfully!';
+                document.getElementById('bookingForm').reset();
+            }
+        });
+    </script>
+</body>
+</html>
